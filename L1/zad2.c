@@ -45,8 +45,6 @@ void addItem(list* l, int value) {
     } else {
         lastItem->nextListItem = newItem;
     }
-    
-    printf("Dodano %d\n", value);
 }
 
 void mergeLists(list* l1, list* l2) {
@@ -69,19 +67,32 @@ int main() {
     }
 
     clock_t start, end;
+
+    printf("Pomiar dla ostatniego elementu z listy: (w mikrosekundach)\n");
     start = clock();
-
-    //TODO: pomiary
-    //im dalszy element chcemy znalezc, tym dluzej program bedzie sie wykonywal -> coraz wiecej iteracji
-    findElement(&list1, 899);
-
+    findElement(&list1, 999);
     end = clock();
     printf("Wyszlo: %.5f\n", ((double)(end-start)));
 
+    printf("Pomiar dla pierwszego elementu z listy: (w mikrosekundach)\n");
+    start = clock();
+    findElement(&list1, 1);
+    end = clock();
+    printf("Wyszlo: %.5f\n", ((double)(end-start)));
+
+    printf("Pomiar dla losowego elementu z listy: (w mikrosekundach)\n");
+    start = clock();
+    findElement(&list1, rand() % 1000);
+    end = clock();
+    printf("Wyszlo: %.5f\n", ((double)(end-start)));
+
+
+    printf("Niektore elementy przed polaczeniem list:\n");
     printf("Element at 10 = %d\n", findElement(&list1, 10));
     printf("Element at 80 = %d\n", findElement(&list1, 80));
     printf("Element at 1002 = %d\n", findElement(&list1, 1002));
     mergeLists(&list1, &list2);
+    printf("Te same elementy po polaczeniu list:\n");
     printf("Element at 10 = %d\n", findElement(&list1, 10));
     printf("Element at 80 = %d\n", findElement(&list1, 80));
     printf("Element at 1002 = %d\n", findElement(&list1, 1002));
