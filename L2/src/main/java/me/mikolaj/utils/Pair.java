@@ -1,6 +1,6 @@
 package me.mikolaj.utils;
 
-public class Pair <T,V> {
+public class Pair<T, V> {
 
 	private final T first;
 	private final V second;
@@ -16,5 +16,13 @@ public class Pair <T,V> {
 
 	public V getSecond() {
 		return second;
+	}
+
+	@Override
+	public String toString() {
+		return "Pair{" +
+				"first=" + first +
+				", second=" + second +
+				'}';
 	}
 }

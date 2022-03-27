@@ -23,4 +23,24 @@ public abstract class SortAlgorithm {
 	public void resetStatistics() {
 		statistics.reset();
 	}
+
+	public boolean compareLessEqual(int i, int j) {
+		statistics.increaseKeyComparison();
+		return i <= j;
+	}
+
+	public boolean compareGreaterEqual(int i, int j) {
+		statistics.increaseKeyComparison();
+		return i >= j;
+	}
+
+	public boolean compareLess(int i, int j) {
+		statistics.increaseKeyComparison();
+		return i < j;
+	}
+
+	public boolean compareGreater(int i, int j) {
+		statistics.increaseKeyComparison();
+		return i > j;
+	}
 }
