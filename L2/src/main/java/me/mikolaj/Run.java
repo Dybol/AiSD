@@ -12,17 +12,35 @@ import java.io.FileWriter;
 public class Run {
 	public static void main(String[] args) throws InterruptedException {
 
-		Run.printFor("Insertion Sort", new InsertionSort());
-		Run.printFor("Merge Sort", new MergeSort());
-		Run.printFor("Quick Sort", new QuickSort());
-		Run.printFor("Dual Pivot Quick Sort", new DualPivotQuickSort());
+		if (args.length == 0) {
+			Run.printFor("Insertion Sort", new InsertionSort());
+			Run.printFor("Merge Sort", new MergeSort());
+			Run.printFor("Quick Sort", new QuickSort());
+			Run.printFor("Dual Pivot Quick Sort", new DualPivotQuickSort());
+			Run.printFor("Mix", new MixAlgorithm());
 
-		Run.printData();
+			Run.printData();
 
-		Run.generateDataFor(new InsertionSort(), 1);
-		Run.generateDataFor(new MergeSort(), 1);
-		Run.generateDataFor(new QuickSort(), 1);
-		Run.generateDataFor(new DualPivotQuickSort(), 1);
+			Run.generateDataFor(new InsertionSort(), 100);
+			Run.generateDataFor(new MergeSort(), 100);
+			Run.generateDataFor(new QuickSort(), 100);
+			Run.generateDataFor(new DualPivotQuickSort(), 100);
+			Run.generateDataFor(new MixAlgorithm(), 100);
+		} else if (args[0].equals("ex1")) {
+			Run.printFor("Insertion Sort", new InsertionSort());
+			Run.printFor("Merge Sort", new MergeSort());
+			Run.printFor("Quick Sort", new QuickSort());
+			Run.printFor("Dual Pivot Quick Sort", new DualPivotQuickSort());
+			Run.printFor("Mix", new MixAlgorithm());
+		} else if (args[0].equals("ex2")) {
+			Run.printData();
+		} else if (args[0].equals("generate")) {
+			Run.generateDataFor(new InsertionSort(), 100);
+			Run.generateDataFor(new MergeSort(), 100);
+			Run.generateDataFor(new QuickSort(), 100);
+			Run.generateDataFor(new DualPivotQuickSort(), 100);
+			Run.generateDataFor(new MixAlgorithm(), 100);
+		}
 	}
 
 	public static void printFor(String name, SortAlgorithm sortAlgorithm) throws InterruptedException {
@@ -75,17 +93,20 @@ public class Run {
 			int[] generatedArray2 = generatedArray1.clone();
 			int[] generatedArray3 = generatedArray1.clone();
 			int[] generatedArray4 = generatedArray1.clone();
+			int[] generatedArray5 = generatedArray1.clone();
 
 			Pair<int[], AlgorithmStatistics> insertionSortStatisticsPair = insertionSort.sortArray(i, generatedArray1);
 			Pair<int[], AlgorithmStatistics> mergeSortStatisticsPair = mergeSort.sortArray(i, generatedArray2);
 			Pair<int[], AlgorithmStatistics> quickSortStatisticsPair = quickSort.sortArray(i, generatedArray3);
 			Pair<int[], AlgorithmStatistics> dualPivotQuickSortStatisticsPair = dualPivotQuickSort.sortArray(i, generatedArray4);
+			Pair<int[], AlgorithmStatistics> mixStatisticsPair = dualPivotQuickSort.sortArray(i, generatedArray5);
 
 			System.out.println("Dla i = " + i + ":");
 			System.out.println("Insertion sort: " + insertionSortStatisticsPair.getSecond());
 			System.out.println("Merge sort: " + mergeSortStatisticsPair.getSecond());
 			System.out.println("Quick sort: " + quickSortStatisticsPair.getSecond());
 			System.out.println("Dual pivot quick sort: " + dualPivotQuickSortStatisticsPair.getSecond());
+			System.out.println("Mix: " + mixStatisticsPair.getSecond());
 			System.out.println("----------------------------------------");
 		}
 	}

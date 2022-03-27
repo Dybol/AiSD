@@ -3,13 +3,37 @@ package me.mikolaj.algorithms;
 import me.mikolaj.statistics.AlgorithmStatistics;
 import me.mikolaj.utils.Pair;
 
-public class MergeSort extends SortAlgorithm {
+public class MixAlgorithm extends SortAlgorithm {
 
 	@Override
 	public Pair<int[], AlgorithmStatistics> sortArray(int n, int[] tab) {
 		if (n == 1)
 			return new Pair<>(tab, getStatistics());
 
+		if (n < 10) {
+			return insertionSort(n, tab);
+		} else {
+			return divide(n, tab);
+		}
+	}
+
+	public Pair<int[], AlgorithmStatistics> insertionSort(int n, int[] tab) {
+		for (int j = 1; j < n; j++) {
+			int key = tab[j];
+			int i = j - 1;
+			while (i >= 0 && compareGreater(tab[i], key)) {
+				getStatistics().increaseKeySwap();
+				tab[i + 1] = tab[i];
+				i--;
+			}
+			tab[i + 1] = key;
+			getStatistics().increaseKeySwap();
+		}
+
+		return new Pair<>(tab, getStatistics());
+	}
+
+	protected Pair<int[], AlgorithmStatistics> divide(int n, int[] tab) {
 		int[] firstPart = new int[(n + 1) / 2];
 		int[] secondPart = new int[(n - firstPart.length)];
 
