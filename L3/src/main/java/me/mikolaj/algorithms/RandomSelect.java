@@ -11,7 +11,17 @@ public class RandomSelect extends Algorithm {
 
 	@Override
 	public Pair<Integer, AlgorithmStatistics> countPositionalStatistic(int n, int k, int[] tab) {
-		return new Pair<>(randomSelect(tab, 0, n - 1, k), getStatistics());
+		if (n < k)
+			return new Pair<>(-1, getStatistics());
+
+		setTabAtTheBeginning(tab.clone());
+
+		System.out.println("Rozpoczynamy algorymt RandomSelect dla tablicy dlugosci " + n);
+
+		int positionalStatistic = randomSelect(tab, 0, n - 1, k);
+		printResults(tab, positionalStatistic);
+
+		return new Pair<>(positionalStatistic, getStatistics());
 	}
 
 	private int randomSelect(int[] tab, int p, int q, int i) {
@@ -20,7 +30,14 @@ public class RandomSelect extends Algorithm {
 
 		int r = randPartition(tab, p, q);
 		int k = r - p + 1;
-		if (k == i)
+
+		if (tab.length < 50) {
+			System.out.println("Stan posredni:");
+			printArray(tab);
+			System.out.println(getStatistics());
+		}
+
+		if (compareEqual(k, i))
 			return tab[r];
 		else if (compareLess(i, k))
 			return randomSelect(tab, p, r - 1, i);
@@ -29,25 +46,19 @@ public class RandomSelect extends Algorithm {
 	}
 
 	private int randPartition(int[] arr, int begin, int end) {
-		int pivot = arr[random.nextInt(begin, end + 1)];
+		int pivotIndex = random.nextInt(begin, end + 1);
+		int pivot = arr[pivotIndex];
+		swap(arr, pivotIndex, end);
 		int i = (begin - 1);
 
 		for (int j = begin; j < end; j++) {
 			if (compareLessEqual(arr[j], pivot)) {
 				i++;
-
-				int swapTemp = arr[i];
-				arr[i] = arr[j];
-				arr[j] = swapTemp;
-				getStatistics().increaseKeySwap();
+				swap(arr, i, j);
 			}
 		}
 
-		int swapTemp = arr[i + 1];
-		arr[i + 1] = arr[end];
-		arr[end] = swapTemp;
-		getStatistics().increaseKeySwap();
-
+		swap(arr, i + 1, end);
 		return i + 1;
 	}
 }

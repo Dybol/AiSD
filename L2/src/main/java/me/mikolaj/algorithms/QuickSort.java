@@ -10,7 +10,9 @@ public class QuickSort extends SortAlgorithm {
 		if (n == 1)
 			return new Pair<>(tab, getStatistics());
 
-		return new Pair<>(quickSort(tab, 0, n - 1), getStatistics());
+		Pair<int[], AlgorithmStatistics> p = new Pair<>(quickSort(tab, 0, n - 1), getStatistics());
+		
+		return p;
 	}
 
 	private int[] quickSort(int[] tab, int low, int high) {
