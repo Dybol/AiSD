@@ -14,10 +14,7 @@ public class Select extends Algorithm {
 
 		setTabAtTheBeginning(tab.clone());
 
-		System.out.println("Rozpoczynamy algorytm Select dla tablicy dlugosci " + n);
-
 		int positionalStatistic = select(tab, 0, n - 1, k);
-		printResults(tab, positionalStatistic);
 
 		return new Pair<>(positionalStatistic, getStatistics());
 	}
@@ -40,11 +37,6 @@ public class Select extends Algorithm {
 			int medOfMed = (i == 1) ? median[0] : select(median, 0, i - 1, i / 2);
 
 			int pos = partition(tab, left, right, medOfMed);
-
-			if (tab.length < 50) {
-				System.out.println("Stan posredni:");
-				printArray(tab);
-			}
 
 			if (compareEqual(pos - left, k - 1))
 				return tab[pos];

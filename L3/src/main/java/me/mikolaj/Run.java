@@ -29,8 +29,8 @@ public class Run {
 		System.out.println(statsForSelect.getFirst());
 		System.out.println(statsForSelect.getSecond());
 
-		checkComparisonsAndSwapsFor(select, 100, 10);
-		checkComparisonsAndSwapsFor(randomSelect, 100, 10);
+		checkComparisonsAndSwapsFor(select, 100, 99);
+		checkComparisonsAndSwapsFor(randomSelect, 100, 99);
 	}
 
 
@@ -38,7 +38,7 @@ public class Run {
 		File outputFile = new File("measurements/" + algorithm.getClass().getSimpleName() + k + ".txt");
 		try (FileWriter fileWriter = new FileWriter(outputFile)) {
 			fileWriter.write("n,c,s\n");
-			for (int i = 100; i <= 10_000; i++) {
+			for (int i = 100; i <= 10_000; i += 100) {
 				int keyComparison = 0;
 				int keySwap = 0;
 				for (int j = 0; j < m; j++) {
@@ -53,6 +53,7 @@ public class Run {
 					keySwap += statistics.getKeySwap();
 					statistics.reset();
 				}
+				System.out.println("Dla i = " + i);
 
 				fileWriter.write(i + "," + keyComparison / m + "," + keySwap / m + "\n");
 			}

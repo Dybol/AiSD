@@ -16,10 +16,7 @@ public class RandomSelect extends Algorithm {
 
 		setTabAtTheBeginning(tab.clone());
 
-		System.out.println("Rozpoczynamy algorymt RandomSelect dla tablicy dlugosci " + n);
-
 		int positionalStatistic = randomSelect(tab, 0, n - 1, k);
-		printResults(tab, positionalStatistic);
 
 		return new Pair<>(positionalStatistic, getStatistics());
 	}
@@ -30,12 +27,6 @@ public class RandomSelect extends Algorithm {
 
 		int r = randPartition(tab, p, q);
 		int k = r - p + 1;
-
-		if (tab.length < 50) {
-			System.out.println("Stan posredni:");
-			printArray(tab);
-			System.out.println(getStatistics());
-		}
 
 		if (compareEqual(k, i))
 			return tab[r];
