@@ -7,6 +7,12 @@ import java.util.Arrays;
 
 public class Select extends Algorithm {
 
+	private int numOfTabsToDivide = 5;
+
+	public void setNumOfTabsToDivide(int numOfTabsToDivide) {
+		this.numOfTabsToDivide = numOfTabsToDivide;
+	}
+
 	@Override
 	public Pair<Integer, AlgorithmStatistics> countPositionalStatistic(int n, int k, int[] tab) {
 		if (n < k)
@@ -14,10 +20,7 @@ public class Select extends Algorithm {
 
 		setTabAtTheBeginning(tab.clone());
 
-		System.out.println("Rozpoczynamy algorytm Select dla tablicy dlugosci " + n);
-
 		int positionalStatistic = select(tab, 0, n - 1, k);
-		printResults(tab, positionalStatistic);
 
 		return new Pair<>(positionalStatistic, getStatistics());
 	}
@@ -28,23 +31,18 @@ public class Select extends Algorithm {
 
 			int i;
 
-			int[] median = new int[(n + 4) / 5];
-			for (i = 0; i < n / 5; i++)
-				median[i] = findMedian(tab, left + i * 5, left + i * 5 + 5);
+			int[] median = new int[(n + numOfTabsToDivide - 1) / numOfTabsToDivide];
+			for (i = 0; i < n / numOfTabsToDivide; i++)
+				median[i] = findMedian(tab, left + i * numOfTabsToDivide, left + i * numOfTabsToDivide + numOfTabsToDivide);
 
 			if (i * 5 < n) {
-				median[i] = findMedian(tab, left + i * 5, left + i * 5 + n % 5);
+				median[i] = findMedian(tab, left + i * numOfTabsToDivide, left + i * numOfTabsToDivide + n % numOfTabsToDivide);
 				i++;
 			}
 
 			int medOfMed = (i == 1) ? median[0] : select(median, 0, i - 1, i / 2);
 
 			int pos = partition(tab, left, right, medOfMed);
-
-			if (tab.length < 50) {
-				System.out.println("Stan posredni:");
-				printArray(tab);
-			}
 
 			if (compareEqual(pos - left, k - 1))
 				return tab[pos];
