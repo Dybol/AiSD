@@ -37,7 +37,7 @@ public class RandomSelect extends Algorithm {
 	}
 
 	private int randPartition(int[] arr, int begin, int end) {
-		int pivotIndex = random.nextInt(begin, end + 1);
+		int pivotIndex = begin + random.nextInt(end - begin + 1);
 		int pivot = arr[pivotIndex];
 		swap(arr, pivotIndex, end);
 		int i = (begin - 1);
