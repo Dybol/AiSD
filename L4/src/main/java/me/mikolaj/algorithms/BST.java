@@ -41,7 +41,7 @@ public class BST extends Tree {
 
 	private TreeItem insertRecursive(TreeItem root, int k) {
 		if (root != null) {
-			if (root.getValue() > k) {
+			if (compareGreater(root.getValue(), k)) {
 				root.setLeftNode(insertRecursive(root.getLeftNode(), k));
 			} else {
 				root.setRightNode(insertRecursive(root.getRightNode(), k));
@@ -66,9 +66,9 @@ public class BST extends Tree {
 		if (root == null)
 			return null;
 
-		if (root.getValue() > k) {
+		if (compareGreater(root.getValue(), k)) {
 			root.setLeftNode(deleteRecursive(root.getLeftNode(), k));
-		} else if (root.getValue() < k) {
+		} else if (compareLess(root.getValue(), k)) {
 			root.setRightNode(deleteRecursive(root.getRightNode(), k));
 		} else {
 			//tree contains one or 0 children
@@ -108,7 +108,7 @@ public class BST extends Tree {
 			int rDepth = countHeightRecursive(root.getRightNode());
 
 			// use the larger one
-			if (lDepth > rDepth)
+			if (compareGreater(lDepth, rDepth))
 				return (lDepth + 1);
 			else
 				return (rDepth + 1);
@@ -125,7 +125,7 @@ public class BST extends Tree {
 
 		if (root.getValue() == k)
 			return root;
-		else if (root.getValue() > k) {
+		else if (compareGreater(root.getValue(), k)) {
 			return searchRecursive(root.getLeftNode(), k);
 		} else {
 			return searchRecursive(root.getRightNode(), k);
