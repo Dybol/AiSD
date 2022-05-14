@@ -21,5 +21,7 @@ public class Run {
 		int[] ascendingArray = tabGenerator.generateAscendingArray(50);
 		bst.insertFromArray(ascendingArray);
 		bst.deleteRandomElements(50);
+
+		System.out.println(bst.countHeight());
 	}
 }

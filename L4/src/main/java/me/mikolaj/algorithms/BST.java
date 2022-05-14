@@ -1,19 +1,32 @@
 package me.mikolaj.algorithms;
 
-import me.mikolaj.data.Tree;
 import me.mikolaj.data.TreeItem;
 import me.mikolaj.generators.RandomTabGenerator;
 
-public class BST {
+public class BST extends Tree {
 
 	private TreeItem root;
 
-	public BST(TreeItem root) {
-		this.root = root;
-	}
-
 	public BST() {
 		this.root = null;
+	}
+
+	@Override
+	public void insert(int k) {
+		System.out.println("insert " + k);
+		root = insertRecursive(root, k);
+		printTree();
+	}
+
+	@Override
+	public void delete(int k) {
+		System.out.println("delete " + k);
+		if (search(k) == null) {
+			System.out.println("klucza " + k + " nie ma w drzewie, wiec nie mozemy go usunac ");
+			return;
+		}
+		deleteRecursive(root, k);
+		printTree();
 	}
 
 	public void insertRandomElements(int numOfElements) {
@@ -24,12 +37,6 @@ public class BST {
 	public void insertFromArray(int[] tab) {
 		for (int i : tab)
 			insert(i);
-	}
-
-	public void insert(int k) {
-		System.out.println("insert " + k);
-		root = insertRecursive(root, k);
-		printTree();
 	}
 
 	private TreeItem insertRecursive(TreeItem root, int k) {
@@ -53,16 +60,6 @@ public class BST {
 	public void deleteFromArray(int[] tab) {
 		for (int i : tab)
 			delete(i);
-	}
-
-	public void delete(int k) {
-		System.out.println("delete " + k);
-		if (search(k) == null) {
-			System.out.println("klucza " + k + " nie ma w drzewie, wiec nie mozemy go usunac ");
-			return;
-		}
-		deleteRecursive(root, k);
-		printTree();
 	}
 
 	private TreeItem deleteRecursive(TreeItem root, int k) {
@@ -89,7 +86,7 @@ public class BST {
 		return root;
 	}
 
-	public int findMinValue(TreeItem root) {
+	private int findMinValue(TreeItem root) {
 		int minValue = root.getValue();
 		while (root.getLeftNode() != null) {
 			minValue = root.getLeftNode().getValue();
@@ -98,8 +95,24 @@ public class BST {
 		return minValue;
 	}
 
-	public int height(Tree tree) {
-		return 0;
+	public int countHeight() {
+		return countHeightRecursive(root);
+	}
+
+	private int countHeightRecursive(TreeItem root) {
+		if (root == null)
+			return -1;
+		else {
+			// compute the depth of each subtree
+			int lDepth = countHeightRecursive(root.getLeftNode());
+			int rDepth = countHeightRecursive(root.getRightNode());
+
+			// use the larger one
+			if (lDepth > rDepth)
+				return (lDepth + 1);
+			else
+				return (rDepth + 1);
+		}
 	}
 
 	public TreeItem search(int k) {
