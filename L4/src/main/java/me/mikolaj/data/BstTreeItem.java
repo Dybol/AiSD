@@ -1,5 +1,7 @@
 package me.mikolaj.data;
 
+import me.mikolaj.statistics.AlgorithmStatistics;
+
 public class BstTreeItem {
 
 	private Integer value;
@@ -29,7 +31,8 @@ public class BstTreeItem {
 		this.value = value;
 	}
 
-	public BstTreeItem getLeftNode() {
+	public BstTreeItem getLeftNode(AlgorithmStatistics statistics) {
+		statistics.increasePointerRead();
 		return leftNode;
 	}
 
@@ -37,7 +40,8 @@ public class BstTreeItem {
 		this.leftNode = leftNode;
 	}
 
-	public BstTreeItem getRightNode() {
+	public BstTreeItem getRightNode(AlgorithmStatistics statistics) {
+		statistics.increasePointerRead();
 		return rightNode;
 	}
 

@@ -42,9 +42,9 @@ public class BST extends Tree {
 	private BstTreeItem insertRecursive(BstTreeItem root, int k) {
 		if (root != null) {
 			if (compareGreater(root.getValue(), k)) {
-				root.setLeftNode(insertRecursive(root.getLeftNode(), k));
+				root.setLeftNode(insertRecursive(root.getLeftNode(getStatistics()), k));
 			} else {
-				root.setRightNode(insertRecursive(root.getRightNode(), k));
+				root.setRightNode(insertRecursive(root.getRightNode(getStatistics()), k));
 			}
 		} else {
 			root = new BstTreeItem(k);
@@ -67,20 +67,20 @@ public class BST extends Tree {
 			return null;
 
 		if (compareGreater(root.getValue(), k)) {
-			root.setLeftNode(deleteRecursive(root.getLeftNode(), k));
+			root.setLeftNode(deleteRecursive(root.getLeftNode(getStatistics()), k));
 		} else if (compareLess(root.getValue(), k)) {
-			root.setRightNode(deleteRecursive(root.getRightNode(), k));
+			root.setRightNode(deleteRecursive(root.getRightNode(getStatistics()), k));
 		} else {
 			//tree contains one or 0 children
-			if (root.getLeftNode() == null)
-				return root.getRightNode();
-			else if (root.getRightNode() == null)
-				return root.getLeftNode();
+			if (root.getLeftNode(getStatistics()) == null)
+				return root.getRightNode(getStatistics());
+			else if (root.getRightNode(getStatistics()) == null)
+				return root.getLeftNode(getStatistics());
 
-			root.setValue(findMinValue(root.getRightNode()));
+			root.setValue(findMinValue(root.getRightNode(getStatistics())));
 
 			//delete successor
-			root.setRightNode(deleteRecursive(root.getRightNode(), root.getValue()));
+			root.setRightNode(deleteRecursive(root.getRightNode(getStatistics()), root.getValue()));
 		}
 
 		return root;
@@ -88,9 +88,9 @@ public class BST extends Tree {
 
 	private int findMinValue(BstTreeItem root) {
 		int minValue = root.getValue();
-		while (root.getLeftNode() != null) {
-			minValue = root.getLeftNode().getValue();
-			root = root.getLeftNode();
+		while (root.getLeftNode(getStatistics()) != null) {
+			minValue = root.getLeftNode(getStatistics()).getValue();
+			root = root.getLeftNode(getStatistics());
 		}
 		return minValue;
 	}
@@ -104,8 +104,8 @@ public class BST extends Tree {
 			return -1;
 		else {
 			// compute the depth of each subtree
-			int lDepth = countHeightRecursive(root.getLeftNode());
-			int rDepth = countHeightRecursive(root.getRightNode());
+			int lDepth = countHeightRecursive(root.getLeftNode(getStatistics()));
+			int rDepth = countHeightRecursive(root.getRightNode(getStatistics()));
 
 			// use the larger one
 			if (compareGreater(lDepth, rDepth))
@@ -126,9 +126,9 @@ public class BST extends Tree {
 		if (root.getValue() == k)
 			return root;
 		else if (compareGreater(root.getValue(), k)) {
-			return searchRecursive(root.getLeftNode(), k);
+			return searchRecursive(root.getLeftNode(getStatistics()), k);
 		} else {
-			return searchRecursive(root.getRightNode(), k);
+			return searchRecursive(root.getRightNode(getStatistics()), k);
 		}
 	}
 
@@ -146,10 +146,10 @@ public class BST extends Tree {
 		sb.append(root.getValue());
 
 		String pointerRight = "└──";
-		String pointerLeft = (root.getRightNode() != null) ? "├──" : "└──";
+		String pointerLeft = (root.getRightNode(getStatistics()) != null) ? "├──" : "└──";
 
-		traverseNodes(sb, "", pointerLeft, root.getLeftNode(), root.getRightNode() != null);
-		traverseNodes(sb, "", pointerRight, root.getRightNode(), false);
+		traverseNodes(sb, "", pointerLeft, root.getLeftNode(getStatistics()), root.getRightNode(getStatistics()) != null);
+		traverseNodes(sb, "", pointerRight, root.getRightNode(getStatistics()), false);
 
 		return sb.toString();
 	}
@@ -171,10 +171,10 @@ public class BST extends Tree {
 
 			String paddingForBoth = paddingBuilder.toString();
 			String pointerRight = "└──";
-			String pointerLeft = (node.getRightNode() != null) ? "├──" : "└──";
+			String pointerLeft = (node.getRightNode(getStatistics()) != null) ? "├──" : "└──";
 
-			traverseNodes(sb, paddingForBoth, pointerLeft, node.getLeftNode(), node.getRightNode() != null);
-			traverseNodes(sb, paddingForBoth, pointerRight, node.getRightNode(), false);
+			traverseNodes(sb, paddingForBoth, pointerLeft, node.getLeftNode(getStatistics()), node.getRightNode(getStatistics()) != null);
+			traverseNodes(sb, paddingForBoth, pointerRight, node.getRightNode(getStatistics()), false);
 		}
 	}
 

@@ -17,16 +17,6 @@ public abstract class Tree {
 		statistics.reset();
 	}
 
-	public int[] swap(int[] arr, int i, int j) {
-		int temp = arr[i];
-		arr[i] = arr[j];
-		arr[j] = temp;
-
-		statistics.increaseKeySwap();
-
-		return arr;
-	}
-
 	public boolean compareLessEqual(int i, int j) {
 		statistics.increaseKeyComparison();
 		return i <= j;
