@@ -1,21 +1,21 @@
 package me.mikolaj.data;
 
-public class TreeItem {
+public class BstTreeItem {
 
 	private Integer value;
-	private TreeItem leftNode;
-	private TreeItem rightNode;
+	private BstTreeItem leftNode;
+	private BstTreeItem rightNode;
 
-	public TreeItem() {
+	public BstTreeItem() {
 	}
 
-	public TreeItem(Integer value) {
+	public BstTreeItem(Integer value) {
 		this.value = value;
 		leftNode = null;
 		rightNode = null;
 	}
 
-	public TreeItem(Integer value, TreeItem leftNode, TreeItem rightNode) {
+	public BstTreeItem(Integer value, BstTreeItem leftNode, BstTreeItem rightNode) {
 		this.value = value;
 		this.leftNode = leftNode;
 		this.rightNode = rightNode;
@@ -29,19 +29,19 @@ public class TreeItem {
 		this.value = value;
 	}
 
-	public TreeItem getLeftNode() {
+	public BstTreeItem getLeftNode() {
 		return leftNode;
 	}
 
-	public void setLeftNode(TreeItem leftNode) {
+	public void setLeftNode(BstTreeItem leftNode) {
 		this.leftNode = leftNode;
 	}
 
-	public TreeItem getRightNode() {
+	public BstTreeItem getRightNode() {
 		return rightNode;
 	}
 
-	public void setRightNode(TreeItem rightNode) {
+	public void setRightNode(BstTreeItem rightNode) {
 		this.rightNode = rightNode;
 	}
 }

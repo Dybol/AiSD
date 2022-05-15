@@ -1,11 +1,11 @@
 package me.mikolaj.algorithms;
 
-import me.mikolaj.data.TreeItem;
+import me.mikolaj.data.BstTreeItem;
 import me.mikolaj.generators.RandomTabGenerator;
 
 public class BST extends Tree {
 
-	private TreeItem root;
+	private BstTreeItem root;
 
 	public BST() {
 		this.root = null;
@@ -39,7 +39,7 @@ public class BST extends Tree {
 			insert(i);
 	}
 
-	private TreeItem insertRecursive(TreeItem root, int k) {
+	private BstTreeItem insertRecursive(BstTreeItem root, int k) {
 		if (root != null) {
 			if (compareGreater(root.getValue(), k)) {
 				root.setLeftNode(insertRecursive(root.getLeftNode(), k));
@@ -47,7 +47,7 @@ public class BST extends Tree {
 				root.setRightNode(insertRecursive(root.getRightNode(), k));
 			}
 		} else {
-			root = new TreeItem(k);
+			root = new BstTreeItem(k);
 		}
 		return root;
 	}
@@ -62,7 +62,7 @@ public class BST extends Tree {
 			delete(i);
 	}
 
-	private TreeItem deleteRecursive(TreeItem root, int k) {
+	private BstTreeItem deleteRecursive(BstTreeItem root, int k) {
 		if (root == null)
 			return null;
 
@@ -86,7 +86,7 @@ public class BST extends Tree {
 		return root;
 	}
 
-	private int findMinValue(TreeItem root) {
+	private int findMinValue(BstTreeItem root) {
 		int minValue = root.getValue();
 		while (root.getLeftNode() != null) {
 			minValue = root.getLeftNode().getValue();
@@ -99,7 +99,7 @@ public class BST extends Tree {
 		return countHeightRecursive(root);
 	}
 
-	private int countHeightRecursive(TreeItem root) {
+	private int countHeightRecursive(BstTreeItem root) {
 		if (root == null)
 			return -1;
 		else {
@@ -115,11 +115,11 @@ public class BST extends Tree {
 		}
 	}
 
-	public TreeItem search(int k) {
+	public BstTreeItem search(int k) {
 		return searchRecursive(root, k);
 	}
 
-	private TreeItem searchRecursive(TreeItem root, int k) {
+	private BstTreeItem searchRecursive(BstTreeItem root, int k) {
 		if (root == null)
 			return null;
 
@@ -136,7 +136,7 @@ public class BST extends Tree {
 		System.out.println(traversePreOrder(root));
 	}
 
-	private String traversePreOrder(TreeItem root) {
+	private String traversePreOrder(BstTreeItem root) {
 
 		if (root == null) {
 			return "";
@@ -154,7 +154,7 @@ public class BST extends Tree {
 		return sb.toString();
 	}
 
-	private void traverseNodes(StringBuilder sb, String padding, String pointer, TreeItem node,
+	private void traverseNodes(StringBuilder sb, String padding, String pointer, BstTreeItem node,
 							   boolean hasRightSibling) {
 		if (node != null) {
 			sb.append("\n");
@@ -178,11 +178,11 @@ public class BST extends Tree {
 		}
 	}
 
-	public TreeItem getRoot() {
+	public BstTreeItem getRoot() {
 		return root;
 	}
 
-	public void setRoot(TreeItem root) {
+	public void setRoot(BstTreeItem root) {
 		this.root = root;
 	}
 }
