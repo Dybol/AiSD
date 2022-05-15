@@ -48,6 +48,7 @@ public class AlgorithmStatistics {
 	public void reset() {
 		keyComparison = 0;
 		pointerRead = 0;
+		height = 0;
 	}
 
 	@Override

@@ -13,25 +13,21 @@ public class BST extends Tree {
 
 	@Override
 	public void insert(int k) {
-		System.out.println("insert " + k);
 		root = insertRecursive(root, k);
-		printTree();
 	}
 
 	@Override
 	public void delete(int k) {
-		System.out.println("delete " + k);
 		if (search(k) == null) {
-			System.out.println("klucza " + k + " nie ma w drzewie, wiec nie mozemy go usunac ");
 			return;
 		}
 		deleteRecursive(root, k);
-		printTree();
 	}
 
 	public void insertRandomElements(int numOfElements) {
 		RandomTabGenerator tabGenerator = new RandomTabGenerator();
 		insertFromArray(tabGenerator.generate(numOfElements));
+		getStatistics().setHeight(countHeight());
 	}
 
 	public void insertFromArray(int[] tab) {

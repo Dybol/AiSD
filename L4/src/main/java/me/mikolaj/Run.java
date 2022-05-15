@@ -2,6 +2,7 @@ package me.mikolaj;
 
 import me.mikolaj.algorithms.BST;
 import me.mikolaj.generators.RandomTabGenerator;
+import me.mikolaj.measurements.Measurements;
 
 public class Run {
 	public static void main(String[] args) {
@@ -23,5 +24,8 @@ public class Run {
 		bst.deleteRandomElements(50);
 
 		System.out.println(bst.countHeight());
+
+		Measurements measurements = new Measurements();
+		measurements.countStatisticsForTree(new BST(), 1);
 	}
 }
