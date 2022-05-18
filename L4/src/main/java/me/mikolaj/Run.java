@@ -2,13 +2,15 @@ package me.mikolaj;
 
 import me.mikolaj.algorithms.BST;
 import me.mikolaj.algorithms.RBBst;
+import me.mikolaj.algorithms.SplayTree;
 import me.mikolaj.data.RBBstTreeItem;
 import me.mikolaj.generators.RandomTabGenerator;
 
 public class Run {
 	public static void main(String[] args) {
 //		ex1();
-		ex3();
+//		ex3();,
+		ex5();
 	}
 
 	public static void ex1() {
@@ -42,5 +44,21 @@ public class Run {
 		rbBst.deleteRandomElements(50);
 
 		System.out.println(rbBst.countHeight());
+	}
+
+	public static void ex5() {
+		SplayTree splayTree = new SplayTree();
+		splayTree.insertRandomElements(50);
+		splayTree.deleteRandomElements(50);
+
+		splayTree.setRoot(null);
+
+		System.out.println("-------------------------------------");
+		RandomTabGenerator tabGenerator = new RandomTabGenerator();
+		int[] ascendingArray = tabGenerator.generateAscendingArray(50);
+		splayTree.insertFromArray(ascendingArray);
+		splayTree.deleteRandomElements(50);
+
+		System.out.println(splayTree.countHeight());
 	}
 }
