@@ -8,9 +8,18 @@ import me.mikolaj.generators.RandomTabGenerator;
 
 public class Run {
 	public static void main(String[] args) {
-//		ex1();
-//		ex3();,
-		ex5();
+		if (args.length == 0) {
+			ex1();
+			ex3();
+			ex5();
+		} else {
+			switch (args[0]) {
+				case "1" -> ex1();
+				case "3" -> ex3();
+				case "5" -> ex5();
+				default -> System.out.println("Choose between 1 / 3 / 5!");
+			}
+		}
 	}
 
 	public static void ex1() {
