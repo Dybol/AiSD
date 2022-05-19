@@ -1,7 +1,6 @@
 package me.mikolaj.algorithms;
 
 import me.mikolaj.data.BstTreeItem;
-import me.mikolaj.data.RBBstTreeItem;
 import me.mikolaj.generators.RandomTabGenerator;
 
 public class SplayTree extends BST {
@@ -91,9 +90,7 @@ public class SplayTree extends BST {
 	}
 
 	public void insert(int k) {
-		System.out.println("insert " + k);
 		root = insertRecursive(k);
-		printTree();
 	}
 
 	public BstTreeItem insertRecursive(int k) {
@@ -123,12 +120,6 @@ public class SplayTree extends BST {
 	}
 
 	public void deleteNode1(int key) {
-		if (search(root, key) != null) {
-			System.out.println("Delete: " + key);
-		} else {
-			System.out.println("Klucza " + key + " nie ma w drzewie!");
-			return;
-		}
 
 		BstTreeItem temp;
 		if (root == null) {
@@ -150,10 +141,13 @@ public class SplayTree extends BST {
 
 			root.setRightNode(temp.getRightNode(getStatistics()));
 		}
-		printTree();
 	}
 
-	private int countHeightRecursive(RBBstTreeItem root) {
+	public int countHeight() {
+		return countHeightRecursive(root);
+	}
+
+	private int countHeightRecursive(BstTreeItem root) {
 		if (root == null)
 			return -1;
 		else {

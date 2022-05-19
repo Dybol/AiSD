@@ -9,9 +9,13 @@ import me.mikolaj.measurements.Measurements;
 
 public class Run {
 	public static void main(String[] args) {
+		Measurements measurements = new Measurements();
+		measurements.countStatisticsForBstTree(new BST(), 20);
+		measurements.countStatisticsForRbBstTree(new RBBst(), 20);
+		measurements.countStatisticsForSplayTree(new SplayTree(), 20);
 //		ex1();
 //		ex3();,
-		ex5();
+//		ex5();
 	}
 
 	public static void ex1() {
@@ -31,7 +35,7 @@ public class Run {
 		System.out.println(bst.countHeight());
 
 		Measurements measurements = new Measurements();
-		measurements.countStatisticsForTree(new BST(), 1);
+		measurements.countStatisticsForBstTree(new BST(), 1);
 	}
 
 	public static void ex3() {

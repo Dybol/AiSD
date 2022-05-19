@@ -35,13 +35,10 @@ public class RBBst extends BST {
 
 	@Override
 	public void delete(int k) {
-		System.out.println("delete " + k);
 		if (searchNode(k) == null) {
-			System.out.println("klucza " + k + " nie ma w drzewie, wiec nie mozemy go usunac ");
 			return;
 		}
 		deleteNode(k);
-		printTree();
 	}
 
 	public RBBstTreeItem searchNode(int key) {
@@ -62,7 +59,6 @@ public class RBBst extends BST {
 	// -- Insertion ----------------------------------------------------------------------------------
 	@Override
 	public void insert(int k) {
-		System.out.println("insert " + k);
 		RBBstTreeItem node = root;
 		RBBstTreeItem parent = null;
 
@@ -89,7 +85,6 @@ public class RBBst extends BST {
 		newNode.setParent(parent);
 
 		fixRedBlackPropertiesAfterInsert(newNode);
-		printTree();
 
 	}
 
