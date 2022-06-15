@@ -4,6 +4,7 @@ import me.mikolaj.algorithms.Heapsort;
 import me.mikolaj.algorithms.LCS;
 import me.mikolaj.algorithms.PriorityQueue;
 import me.mikolaj.generators.RandomTabGenerator;
+import me.mikolaj.measurements.Measurements;
 
 import java.util.ArrayList;
 
@@ -68,7 +69,13 @@ public class Run {
 
 	public static void lcs() {
 		LCS lcs = new LCS();
-		lcs.findLCS("ABEDM", "ABCDEG");
-		lcs.findLCS("ALBERTA", "ABORT");
+		System.out.println(lcs.findLCS("ABEDM", "ABCDEG"));
+		System.out.println(lcs.findLCS("ALBERTA", "ABORT"));
+
+		for (int j = 10; j <= 100; j += 10) {
+			String firstString = Measurements.generateString(j);
+			String secondString = Measurements.generateString(j);
+			System.out.println(lcs.findLCS(firstString, secondString));
+		}
 	}
 }

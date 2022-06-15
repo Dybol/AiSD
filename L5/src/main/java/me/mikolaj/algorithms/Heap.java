@@ -9,9 +9,10 @@ public class Heap {
 	private final AlgorithmStatistics statistics = new AlgorithmStatistics();
 
 	public void heapify(int[] array, int size, int i) {
-		//TODO: printowanie stanu posredniego
-		System.out.println("Stan posredni: ");
-		printArray(array);
+		if(array.length <= 50) {
+			System.out.println("Stan posredni: ");
+			printArray(array);
+		}
 		int largest = i;
 		int l = 2 * i + 1;
 		int r = 2 * i + 2;
